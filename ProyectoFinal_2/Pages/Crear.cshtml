@@ -1,0 +1,68 @@
+﻿@page
+@model ProyectoFinal_2.Pages.CrearModel
+@{
+    ViewData["Title"] = "Añadir producto";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <h2 class="text-info">Añadir producto</h2>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container" style="padding: 50px">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label asp-for="Productos.Codigo"></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input asp-for="Productos.Codigo" class="form-control"/>
+                        </div>
+                        <span asp-validation-for="Productos.Codigo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label asp-for="Productos.Nombre"></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input asp-for="Productos.Nombre" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Productos.Nombre" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <label asp-for="Productos.Cantidad"></label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input asp-for="Productos.Cantidad" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Productos.Cantidad" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-2 offset-sm-2">
+                            <input type="submit" value="Añadir" class="btn btn-primary form-control" />
+                        </div>
+                        <div class="col-sm-4">
+                            <a asp-page="Index" class="btn btn-success form-control">Volver a la lista</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+

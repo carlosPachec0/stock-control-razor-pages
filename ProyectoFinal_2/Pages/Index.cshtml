@@ -1,0 +1,91 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Gestión de productos";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Gestión de productos</h1>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h2 class="text-info">Lista de productos</h2>
+            </div>
+
+            <div class="col-sm-6">
+                <a asp-page="Crear" class="btn btn-primary">Añadir nuevo producto</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            @{
+                var i = 1;
+            }
+            @if (Model.Productos.Count() > 0)
+            {
+                <br />
+                <br />
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th>Número</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().Codigo)</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().Nombre)</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().Cantidad)</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().Auditado)</th>
+                        <th>@Html.DisplayNameFor(m => m.Productos.First().FechaControl)</th>
+                        <th>Opciones</th>
+                    </tr>
+                    @foreach (var producto in Model.Productos)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@Html.DisplayFor(m => producto.Codigo)</td>
+                            <td>@Html.DisplayFor(m => producto.Nombre)</td>
+                            <td>@Html.DisplayFor(m => producto.Cantidad)</td>
+                            <td>
+                                @{
+                                    string opcion = producto.Auditado ? "Auditado" : "Pendiente";
+                                }
+                                @Html.DisplayFor(m=>opcion)
+
+                            </td>
+                            <td>@Html.DisplayFor(m => producto.FechaControl)</td>
+                            <td>
+                                @if (producto.Auditado == true)
+                                {
+                                <button asp-page-handler="Borrar" asp-route-id="@producto.Id" onclick="return confirm('¿Está seguro de querer borrar @producto.Nombre?')"
+                                class="btn btn-danger btnsm">
+                                    Borrar
+                                </button>
+                                    
+                                }
+                                else
+                                {
+
+                                    <button asp-page-handler="Auditado" asp-route-id="@producto.Id"
+                                onclick="return confirm('¿Está seguro que quiere auditar @producto.Nombre?')" class="btn btn-info">
+                                        Auditar
+                                    </button>
+                                <a asp-route-id="@producto.Id" asp-page="Editar" class="btn btn-success">Editar</a>
+                                <button asp-page-handler="Borrar" asp-route-id="@producto.Id" onclick="return confirm('¿Está seguro de querer borrar @producto.Nombre?')"
+                                class="btn btn-danger btnsm">
+                                    Borrar
+                                </button>
+                                }
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No hay productos disponibles</p>
+            }
+        </form>
+    </div>
+</div>
